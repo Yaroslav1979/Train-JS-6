@@ -152,6 +152,8 @@ let laptop = {
 };
 // Функція для деструктуризації об'єкту
 function destructureObject(obj) {
+  let {brand, model} = laptop;
+  return obj;
   // Використовуємо деструктуризацію для створення нових змінних з властивостей об'єкту і отримуємо з нього змінні brand та model
   // Повертаємо нові змінні  в форматі 'Brand: ${brand}, Model: ${model}'
 }
@@ -163,15 +165,45 @@ console.log(destructureObject(laptop)); // Виведе Brand: Dell, Model: XPS 
 
 // Створюємо масив об'єктів userList, першим елементом якого буде об'єкт name:"Jack",role:"reader", а другим об'єкт name: "Jane", role: 'admin'
 
+// let userList = [
+//   { name: "Jack", role: "reader" },
+//   { name: "Jane", role: "admin" },
+// ];
+// // Функція для зміни ролі всіх осіб у масиві
+// function changeRole(array, newRole) {
+//   for (const newRole of array) {
+//     newRole.role = "editor";
+//   }
+//   console.log(userList);
+//   // Ітеруємося по масиву об'єктів за допомогою циклу "for of"
+//   // Змінюємо роль кожного користувача на нове ім'я
+//   // Виводимо об'єкт на консоль
+// }
+
+// або:
+
+// let userList = [
+//   { name: "Jack", role: "reader" },
+//   { name: "Jane", role: "admin" },
+// ];
+// function changeRole(array, newRole) {
+//   for (const user of array) {
+//     user.role = "editor";
+//   }
+//   console.log(userList);//  
+// }
+
+// або:
+
 let userList = [
   { name: "Jack", role: "reader" },
   { name: "Jane", role: "admin" },
 ];
-// Функція для зміни ролі всіх осіб у масиві
 function changeRole(array, newRole) {
-  // Ітеруємося по масиву об'єктів за допомогою циклу "for of"
-  // Змінюємо роль кожного користувача на нове ім'я
-  // Виводимо об'єкт на консоль
+  for (const user of userList) {
+    user.role = "editor";
+  }
+  console.log(array);  
 }
 
 console.log("Завдання 10 ====================================");
@@ -192,6 +224,9 @@ let product = {
 };
 // Функція для виводу деталей людини
 function printProductDetails(obj) {
+  let {productName, price, manufacturer: {companyName, country}} = product;
+  console.log(productName, price, companyName, country)
+
   // Використовуємо деструктуризацію для отримання значень productName, price i також значень companyName, country вкладеного об'єкту manufacturer
   // Виводимо productName, price, companyName та country на консоль
 }
@@ -207,10 +242,14 @@ let planet2 = { name: "Земля", radius: 6371 };
 
 // Функція для перевірки рівності об'єктів
 function compareObjects(obj1, obj2) {
-  // Виводимо результат порівняння об'єктів
-  // Присвоємо obj2 значення об'єкту obj1
-  // Виводимо результат порівняння об'єктів
+   // Виводимо результат порівняння об'єктів
+  console.log(obj1 === obj2);
+   // Присвоємо obj2 значення об'єкту obj1
+  obj2 = obj1;
+// Виводимо результат порівняння об'єктів
+  console.log(obj1 === obj2);  
 }
+
 
 console.log("Завдання 12 ====================================");
 compareObjects(planet1, planet2); // Виведе
@@ -230,7 +269,8 @@ function showCarInfo({
   year = 0,
   country = "Unknown",
 } = {}) {
-  // Повертаємо об'єкт зі значеннями властивостей
+  return car = {brand, year, country}
+    // Повертаємо об'єкт зі значеннями властивостей
 }
 
 console.log("Завдання 13 ====================================");
@@ -239,12 +279,15 @@ console.log(showCarInfo(car)); // Виведе { brand: 'BMW', year: 2022, count
 // Завдання 14: Додайте нову властивість до вбудованого об'єкту Array через літерал.
 // Створюємо функцію, яка буде додавати нову властивість до масиву
 function addProperty(array) {
+  Array.prototype.customProperty = 'myProperty';
+    return array;
   // Додаємо нову властивість customProperty до прототипу Array зі значенням myProperty
   // Повертаємо переданий масив з новою властивістю
 }
 
 console.log("Завдання 14 ====================================");
 // Створимо масив newArr з новою властивістю за допомогої нашої функції в яку передамо [1, 2, 3, 4, 5]
-
+let newArr = [1, 2, 3, 4, 5];
+addProperty(newArr);
 // Розкоментуйте рядок нижче після виконня завдання для перевірки
-// console.log(newArr.customProperty); // Виведе myProperty
+console.log(newArr.customProperty); // Виведе myProperty
