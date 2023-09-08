@@ -1,5 +1,5 @@
 //Завдання 1.Cтворіть об'єкт person за допомогою конструктора з полями name: "John",age: 25
-let person = {};
+let person = {name: "John", age: 25};
 
 console.log("Завдання 1 ====================================");
 
@@ -7,10 +7,20 @@ console.log("person", person); // Виведе {name: "John", age: 25}
 
 //Завдання 2. Cтворіть об'єкт personLarge який буде мати такі ж поля як person ,
 // та вкладений об'єкт address з полями  street: "123 Main St", city: "New York", country: "USA",
+
+let { name, age } = person;
 let personLarge = {
-  //використовуємо деструктурізацію на об'єкті person
-  //створюємо об'єкт address
+  name,
+  age,
+  address: {
+    street: "123 Main St",
+    city: "New York",
+    country: "USA"
+  }
 };
+  // використовуємо деструктурізацію на об'єкті person
+  // створюємо об'єкт address
+
 
 console.log("Завдання 2 ====================================");
 console.log("personLarge", personLarge); // Виведе
@@ -29,6 +39,8 @@ var animal = {
 
 // Функція для створення нового об'єкта з тими ж властивостями
 function copyObject(obj) {
+  let {...person} = animal;
+  return person;
   // Використовуємо синтаксис деструктурізації {...person} для створення нового об'єкта з тими ж властивостями
   // Повертаємо новий об'єкт
 }
@@ -44,6 +56,10 @@ let fruit = {
 };
 // Функція для перевірки наявності властивості в об'єкті
 function hasProperty(obj, property) {
+  if (property in obj)
+  {return `Property ${property} exists.`;}
+ {return `Property ${property} does not exist`;
+  }
   // Використовуємо оператор "in" для перевірки наявності властивості
   // Запишимо умову якщо властивість існує повертає текст Property ${property} exists,
   // інашке повертаємо Property ${property} does not exist.
@@ -52,6 +68,7 @@ function hasProperty(obj, property) {
 console.log("Завдання 4 ====================================");
 console.log(hasProperty(fruit, "name")); // Виведе "Property name exists."
 console.log(hasProperty(fruit, "taste")); // Виведе "Property taste does not exist."
+console.log(hasProperty(fruit, "color"));
 
 // Завдання 5: Створіть функцію, що отримує об'єкт і виводить на консоль всі його ключі та значення.
 let country = {
@@ -60,6 +77,11 @@ let country = {
 };
 // Функція для виведення всіх ключів і значень об'єкта
 function printKeysAndValues(obj) {
+  for (const key in obj) {
+    const value = obj[key];
+    console.log(`Ключ: ${key}, Значення: ${value}`);
+  }
+
   // Проходимося по всіх ключах об'єкту за допомогою циклу "for in"
   // Виводимо ключ та значення на консоль
 }
@@ -76,7 +98,10 @@ let movie = {
   director: "Christopher Nolan",
 };
 // Функція для видалення властивості з об'єкта
-function deleteProperty(obj, property) {
+function deleteProperty(obj, property) {  
+    delete obj[property];
+  return obj;
+
   // Використовуємо оператор "delete" для видалення властивості
   // Повертаємо об'єкт
 }
@@ -89,14 +114,18 @@ console.log(deleteProperty(movie, "director")); // Виведе { title: 'Incept
 let user = {
   name: "John",
   age: 25,
+  introduce: function () {
+    return `My name is ${this.name} and I am ${this.age} years old.`;
+  },
   // Створюємо метод introduce, який за допомогою ключового слова this має повернути такий рядок
   // My name is John and I am 25 years old.
 };
 
+
 console.log("Завдання 7 ====================================");
 // Викликаємо метод introduce об'єкта user
 // Розкоментуйте рядок нижче після виконня завдання для перевірки
-// console.log(user.introduce());
+console.log(user.introduce());
 // Виведе My name is John and I am 25 years old.
 
 // Завдання 8: Створіть функцію, яка додає нове поле до об'єкту.
@@ -107,6 +136,8 @@ let book = {
 
 // Функція для додавання нового поля до об'єкту
 function addField(obj, newField, value) {
+  obj[newField] = value;
+  return book
   // Додаємо нове поле до об'єкту з допомогою квадратних дужок
   // Повертаємо об'єкт
 }
